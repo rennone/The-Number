@@ -24,4 +24,16 @@ Sprite(Texture *_sprite):sprite(_sprite)
   void spriteDraw(const SpriteRegion *region, float width, float height);
   void spriteEnd(); 
 };
+
+class SpriteBatcher
+{
+  float *verticesBuffer;
+  float *indicesBuffer;
+  int bufferIndex;
+  int numSprite;  
+public:
+  SpriteBatcher(int _maxSprites);
+  void drawSprite(const float &x, const float &y, const float &width,const float &height, const TextureRegion *region);
+  void drawSprite(const float &x, const float &y, const float &width, const float &height, const float &angle, const TextureRegion *region);  
+};
 #endif

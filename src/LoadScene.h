@@ -3,7 +3,7 @@
 
 #include "GameScene.h"
 #include "Assets.h"
-#include "PlayScene.h"
+#include "TitleScene.h"
 
 class LoadScene:public GameScene
 {
@@ -16,9 +16,9 @@ public:
 	}
 	void update(float delta)
 	{
-Assets::loadFiles();
-game->replaceScene(new PlayScene(game));
-return;
+          Assets::loadFiles();
+          game->replaceScene(new TitleScene(game));
+          return;
 	}
 
 	void render(float delta)

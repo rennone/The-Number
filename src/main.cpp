@@ -4,9 +4,7 @@
 #include <string>
 
 #include "Game.h"
-#include "TitleScene.h"
-
-
+#include "LoadScene.h"
 
 static void error_callback(int error, const char* description)
 {
@@ -37,7 +35,7 @@ int main(int argc, char *argv[]) {
   glfwSetKeyCallback(window, key_callback);
   
   glClearColor(0.0, 0.0, 0.0, 1.0);  
-  game->replaceScene(new TitleScene(game));
+  game->replaceScene(new LoadScene(game));
   
   while(!glfwWindowShouldClose(window))
   {

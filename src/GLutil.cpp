@@ -122,7 +122,7 @@ void glDrawTextureCube(const float size,const int tex,const bool reverse)
   glPopAttrib();
 }
 
-void glDrawTexture(const float width, const float height, const int tex)
+void glDrawTexture(const float width, const float height, const int tex, const float depth)
 {
   
   glPushAttrib( GL_CURRENT_BIT | GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT);  
@@ -131,10 +131,10 @@ void glDrawTexture(const float width, const float height, const int tex)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE);  
   float vertices[] =
   {
-    -width , -height, 0,   0, 1,
-    -width , +height, 0,   0, 0,
-    +width , +height, 0,   1, 0,
-    +width , -height, 0,   1, 1,
+    -width/2, -height/2, depth,   0, 1,
+    -width/2, +height/2, depth,   0, 0,
+    +width/2, +height/2, depth,   1, 0,
+    +width/2, -height/2, depth,   1, 1,
   };
   
   GLuint indices[] =
@@ -167,10 +167,10 @@ void glDrawTexture(const float width, const float height, float left, float righ
   glBlendFunc(GL_SRC_ALPHA, GL_ONE);  
   float vertices[] =
   {
-    -width , -height, 0,   left, bottom,
-    -width , +height, 0,   left, top,
-    +width , +height, 0,   right, top,
-    +width , -height, 0,   right, bottom,
+    -width/2 , -height/2, 0,   left, bottom,
+    -width/2 , +height/2, 0,   left, top,
+    +width/2 , +height/2, 0,   right, top,
+    +width/2 , -height/2, 0,   right, bottom,
   };
   
   GLuint indices[] =

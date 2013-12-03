@@ -12,6 +12,8 @@ class Numbers:public Actor
   void reset();
   void renderNumber();
   void renderFinger();
+  void checkTouch();
+  
   Sprite *spriteNumber, *spriteFinger;
 public:
 Numbers(std::string name, GameApplication *game):Actor(name, game)
