@@ -9,7 +9,6 @@ Texture* Assets::titleString = NULL;
 Texture* Assets::playString = NULL;
 Texture* Assets::scoreString = NULL;
 
-
 TextureRegion *Assets::titleBackgroundRegion;
 
 Texture *Assets::charAtlus = NULL;
@@ -30,6 +29,7 @@ TextureRegion *Assets::numberRegions[9]; //TextureRegion* の配列(ポインタ
 void Assets::loadFiles()
 {
   titleBground = new PngTexture("../resources/background.png");
+
   titleBackgroundRegion = new TextureRegion(titleBground, 0, 0, titleBground->getWidth(), titleBground->getHeight());
   
   titleString = new PngTexture("../resources/titleString.png");
@@ -41,7 +41,11 @@ void Assets::loadFiles()
   stringPlayRegion  = new TextureRegion(stringAtlus, 0, 1*stringAtlus->getHeight()/4.0, stringAtlus->getWidth(), stringAtlus->getHeight()/4.0);
   stringScoreRegion = new TextureRegion(stringAtlus, 0, 2*stringAtlus->getHeight()/4.0, stringAtlus->getWidth(), stringAtlus->getHeight()/4.0);
   stringExitRegion  = new TextureRegion(stringAtlus, 0, 3*stringAtlus->getHeight()/4.0, stringAtlus->getWidth(), stringAtlus->getHeight()/4.0);
-  
+
+  titleString = new PngTexture("../resources/titleString.png");
+  playString = new PngTexture("../resources/playString.png");
+  scoreString = new PngTexture("../resources/scoreString.png");
+
   target = new PngTexture("../resources/target.png");
   targetRegion = new TextureRegion(target, 0, 0, target->getWidth(), target->getHeight());  
 

@@ -32,6 +32,7 @@ public :
   static TextureRegion *stringExitRegion;
   static void loadFiles();
   static void unloadFiles();
+
 private:
   Assets();
   Assets& operator=(const Assets& obj);

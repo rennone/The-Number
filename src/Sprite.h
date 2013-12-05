@@ -16,4 +16,5 @@ public:
   void drawSprite(const float &x, const float &y, const float &width, const float &height, const float &angle, const TextureRegion *region);
   void endBatch();
 };
+
 #endif

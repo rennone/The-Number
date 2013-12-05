@@ -1,61 +1,32 @@
+#ifndef PNG_TEXTURE_H_2013_12_03
+#define PNG_TEXTURE_H_2013_12_03
+#include "Texture.h"
+#include "lodepng.h"
+#include <vector>
+#include <sstream>
 
-#ifndef PNG_H_2013_11_19
-#define PNG_H_2013_11_19
+#include <GL/glut.h>
+#include <GLFW/glfw3.h>
 
-
-#include<GLFW/glfw3.h>
-#include<vector>
-#include"lodepng.h"
-#include<sstream>
-
-class Texture
-{
-protected:
-GLuint texId;
-public:
-	virtual void load(const char*) = 0;
-	virtual size_t getTexWidth()=0;	//ƒeƒNƒXƒ`ƒƒƒTƒCƒY(power of 2)
-	virtual size_t getTexHeight()=0;
-	virtual unsigned getWidth()=0;  //ƒCƒ[ƒWƒTƒCƒY
-	virtual unsigned getHeight()=0;
-	virtual unsigned char* getImage()=0;
-	virtual GLuint getTexId()=0;
-
-        virtual void bind();
-};
-
-class TextureRegion
+class PngTexture: public Texture
 {
 public:
-  const float u1, v1;
-  const float u2, v2;
-  const Texture *texture;
-
-  TextureRegion(Texture *_texture, float x, float y, float width, float height)
-    :texture(_texture),
-    u1(        1.0*x/_texture->getTexWidth()), v1(          1.0*y/_texture->getTexHeight()),
-    u2(1.0*(x+width)/_texture->getTexWidth()), v2( 1.0*(y+height)/_texture->getTexHeight())
-  {
-  }
-};
-
-class PngTexture:public Texture
-{
-public:
+  PngTexture();
+  
   PngTexture(const char* fileName){
     load(fileName);
   }
   
-  virtual void load(const char* fileName) throw(std::string)
+  virtual void load(const char* fileName) throw(string)
   {
-    std::vector<unsigned char> raw_image;
+    vector<unsigned char> raw_image;
     unsigned int error = lodepng::decode(raw_image, width, height, fileName);
 
     if(error != 0)
     {
       std::stringstream ss;
       ss << "can not read file" << fileName; 
-      throw ss.str();		//—áŠO‚ð“Š‚°‚é
+      throw ss.str();		//ä¾‹å¤–ã‚’æŠ•ã’ã‚‹
     }
 
     unsigned int u2 = 1; while(u2 < width ) u2*=2;
@@ -64,7 +35,7 @@ public:
     double v3 = (double) height/v2;
 
     image = new unsigned char[u2 * v2 * 4];
-    memset(image, 0, sizeof(unsigned char)*u2 * v2 * 4);	//0‚Å‰Šú‰»
+    memset(image, 0, sizeof(unsigned char)*u2 * v2 * 4);	//0ã§åˆæœŸåŒ–
     for(size_t y = 0; y < height; y++) 
       for(size_t x = 0; x < width; x++)
         for(size_t c = 0; c < 4; c++)
@@ -94,7 +65,6 @@ public:
   {
     return width;
   }
-
   virtual inline unsigned getHeight()
   {
     return height;
@@ -114,8 +84,8 @@ public:
   }
 public:
   unsigned char *image;
-  unsigned int width, height;		   //‚à‚Æ‚ÌƒCƒ[ƒW‚ÌƒTƒCƒY
-  size_t texWidth, texHeight; //Šm•Û‚µ‚½ƒeƒNƒXƒ`ƒƒƒCƒ[ƒW‚ÌƒTƒCƒY(2‚Ì—Ýæ)
+  unsigned int width, height;		   //ã‚‚ã¨ã®ã‚¤ãƒ¡ãƒ¼ã‚¸ã®ã‚µã‚¤ã‚º
+  size_t texWidth, texHeight; //ç¢ºä¿ã—ãŸãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¤ãƒ¡ãƒ¼ã‚¸ã®ã‚µã‚¤ã‚º(2ã®ç´¯ä¹—)
 };
 
 #endif

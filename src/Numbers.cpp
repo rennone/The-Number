@@ -197,7 +197,6 @@ void Numbers::renderFinger()
 {
   auto leapMotion = game->Input()->LeapMotion();
   auto fingers = leapMotion->ScreenPoints();
-
   batcher->beginBatch(Assets::target);
   for( auto finger : fingers)
   {

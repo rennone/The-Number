@@ -38,7 +38,7 @@ void SpriteBatcher::endBatch()
 {  
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
+  
   glVertexPointer(3,  GL_FLOAT, 4*sizeof(float), verticesBuffer  );
   glTexCoordPointer(2,GL_FLOAT, 4*sizeof(float), verticesBuffer+2);
   
@@ -46,6 +46,7 @@ void SpriteBatcher::endBatch()
 
   glBindTexture(GL_TEXTURE_2D, 0);
 }
+
 
 void SpriteBatcher::drawSprite(const float &x, const float &y, const float &width,const float &height, const TextureRegion *region)
 {

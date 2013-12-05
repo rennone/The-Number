@@ -5,6 +5,7 @@
 #include "Debugger.h"
 #include "Assets.h"
 #include "GLutil.h"
+
 #include "BeforePlayScene.h"
 
 TitleScene::TitleScene(GameApplication *game)
@@ -38,7 +39,6 @@ void TitleScene::update(float delta)
   }  
   if(keyboard->keyState(GLFW_KEY_A) == GLFW_PRESS){
     game->replaceScene(new BeforePlayScene(game));
-    return;
   }
 }
         
