@@ -95,6 +95,7 @@ public:
     m_lastFrame = frame;
   }
 
+  //中心が原点 左下が(-width/2, -height/2)
   const std::vector<Leap::Vector> ScreenPoints()
   {
     std::vector<Leap::Vector> screenFingers;
@@ -102,15 +103,18 @@ public:
     for( auto finger : m_lastFrame.fingers() )
     {
       auto normal =  screen.intersect(finger, true);
-      screenFingers.push_back( Leap::Vector(normal.x*screen.widthPixels(), (1.0f - normal.y)*screen.heightPixels(), 0) );
+      screenFingers.push_back( Leap::Vector( (normal.x-0.5)*screen.widthPixels(), (normal.y-0.5)*screen.heightPixels(), 0) );
     }
     return screenFingers;
   }
-        
+
+  const std::vector<Leap::Vector> PushedPoints();
+          
   Leap::Frame Frame()
   {
     return m_lastFrame;
   }
+  
 /*
   CircleGesture()
   {

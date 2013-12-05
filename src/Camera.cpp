@@ -32,12 +32,10 @@ void Camera::set2DView(GLFWwindow* window)
   float ratio;
   int width, height;
   glfwGetFramebufferSize(window, &width, &height);
-  ratio = width / (float) height;
-  glViewport(0, 0, width, height);
-  
+  glViewport(0, 0, width, height);  
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(0, width, height, 0, -10, 10);
+  glOrtho(-width/2, width/2, -height/2, height/2, -10, 10);
   
   glMatrixMode(GL_MODELVIEW);
 
@@ -51,8 +49,8 @@ Leap::Vector Camera::screenToWorldVector(GLFWwindow* window, float x, float y)
   glfwGetFramebufferSize(window, &width, &height);
   ratio = width / (float) height;
   
-  float screenX = x/width - 0.5;
-  float screenY = 0.5 - y/height;  
+  float screenX = x/width;
+  float screenY = y/height;  
   float nearHeight = near*tan(M_PI*fovy/180.0);
   float nearWidth  = nearHeight*ratio;
   float farHeight  = far*tan(M_PI*fovy/180.0);

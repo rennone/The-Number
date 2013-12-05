@@ -14,7 +14,7 @@ class GameScene;
 class GameApplication
 {
 private:
-  GameScene *scene;
+  GameScene *scene, *nextScene;
   InputManager *input;
   double elapsedTime[2];
   float delta;
@@ -23,6 +23,7 @@ public:
   GameApplication()
   {
     scene = NULL;
+    nextScene = NULL;
   };
 
   virtual inline void initialize();
@@ -31,6 +32,7 @@ public:
   virtual inline void mouse(int buton, int state, int x, int y);
   virtual inline void motion(int x, int y);
   virtual inline void loop();
+  virtual inline void terminate();
   
   //------------------ÉQÉbÉ^Å[--------------------//
   virtual inline InputManager* Input()

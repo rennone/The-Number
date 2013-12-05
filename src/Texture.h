@@ -1,15 +1,16 @@
 
 #ifndef PNG_H_2013_11_19
 #define PNG_H_2013_11_19
-#include "lodepng.h"
-#include <vector>
-#include <sstream>
-#include <GL/glut.h>
-#include <iostream>
 
-using namespace std;
+#include<GLFW/glfw3.h>
+#include<vector>
+#include"lodepng.h"
+#include<sstream>
+
 class Texture
 {
+protected:
+GLuint texId;
 public:
 	virtual void load(const char*) = 0;
 	virtual size_t getTexWidth()=0;	//テクスチャサイズ(power of 2)
@@ -18,6 +19,22 @@ public:
 	virtual unsigned getHeight()=0;
 	virtual unsigned char* getImage()=0;
 	virtual GLuint getTexId()=0;
+        virtual void bind();
+};
+
+class TextureRegion
+{
+public:
+  const float u1, v1;
+  const float u2, v2;
+  const Texture *texture;
+
+  TextureRegion(Texture *_texture, float x, float y, float width, float height)
+    :texture(_texture),
+    u1(        1.0*x/_texture->getTexWidth()), v1(          1.0*y/_texture->getTexHeight()),
+    u2(1.0*(x+width)/_texture->getTexWidth()), v2( 1.0*(y+height)/_texture->getTexHeight())
+  {
+  }
 };
 
 class PngTexture: public Texture
@@ -29,9 +46,9 @@ public:
     load(fileName);
   }
   
-  virtual void load(const char* fileName) throw(string)
+  virtual void load(const char* fileName) throw(std::string)
   {
-    vector<unsigned char> raw_image;
+    std::vector<unsigned char> raw_image;
     unsigned int error = lodepng::decode(raw_image, width, height, fileName);
 
     if(error != 0)
@@ -96,8 +113,8 @@ public:
   }
 public:
   unsigned char *image;
-  GLuint texId;
   unsigned int width, height;		   //もとのイメージのサイズ
   size_t texWidth, texHeight; //確保したテクスチャイメージのサイズ(2の累乗)
 };
+
 #endif

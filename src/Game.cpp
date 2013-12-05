@@ -5,7 +5,7 @@
 void GameApplication::initialize()
 {
   window = glfwCreateWindow(640, 480, "example", glfwGetPrimaryMonitor(), NULL);
-    
+//  window = glfwCreateWindow(640, 480, "example", NULL, NULL);
   if(!window)
   {
     glfwTerminate();
@@ -54,7 +54,14 @@ void GameApplication::motion(int x, int y)
 }
 
 void GameApplication::loop()
-{  
+{
+  if(scene != nextScene && scene != NULL)
+  {
+    scene->finish();
+    delete scene;
+    scene = nextScene;
+  }
+  
   float delta = elapsedTime[1] - elapsedTime[0]; //前フレームの経過時間
   elapsedTime[0] = glfwGetTime();
   update(delta);
@@ -62,14 +69,22 @@ void GameApplication::loop()
   elapsedTime[1] = glfwGetTime();
 }
 
+void GameApplication::terminate()
+{
+  if(scene != NULL)
+  {
+    scene->finish();
+    delete scene;
+  }
+
+  glfwSetWindowShouldClose(window, GL_TRUE);
+}
+
 void GameApplication::replaceScene(GameScene *scene)
 {
-  if(this->scene != NULL)
-  {
-    this->scene->finish();
-    delete this->scene;
-  }
-    
-  this->scene = scene;
+  nextScene = scene;
+
+  if(this->scene == NULL)
+    this->scene = nextScene;
 }
 

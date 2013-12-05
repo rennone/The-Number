@@ -3,25 +3,17 @@
 
 #include "Texture.h"
 
-class SpriteRegion
+class SpriteBatcher
 {
-public:  
-  float left, right, top, bottom;
-SpriteRegion(float l, float r, float t, float b)
-  :left(l), right(r), top(t),bottom(b)
-  {
-  }
-};
-
-class Sprite
-{
-  Texture *sprite;
+  float *verticesBuffer;
+  unsigned int *indicesBuffer;
+  int bufferIndex;
+  int numSprite;
 public:
-Sprite(Texture *_sprite):sprite(_sprite)
-  {
-  }    
-  void spriteBegin();
-  void spriteDraw(const SpriteRegion *region, float width, float height);
-  void spriteEnd(); 
+  SpriteBatcher(int _maxSprites);
+  void beginBatch(Texture *texture);
+  void drawSprite(const float &x, const float &y, const float &width, const float &height, const TextureRegion *region);
+  void drawSprite(const float &x, const float &y, const float &width, const float &height, const float &angle, const TextureRegion *region);
+  void endBatch();
 };
 #endif
