@@ -24,9 +24,7 @@ public:
   virtual void reshape(int width, int height)
   {
   }
+  virtual void finish();
 
-  virtual void finish()
-  {
-  }
 };
 #endif

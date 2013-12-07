@@ -2,71 +2,90 @@
 #include <math.h>
 #include "Debugger.h"
 
-Texture* Assets::target = NULL;
-Texture* Assets::numbers = NULL;
-Texture* Assets::titleBground = NULL;
-Texture* Assets::titleString = NULL;
-Texture* Assets::playString = NULL;
-Texture* Assets::scoreString = NULL;
+Texture* Assets::textureAtlas = NULL;
+Texture* Assets::backgroundAtlas = NULL;
+Texture* Assets::characterAtlas = NULL;
 
+TextureRegion *Assets::fingerRegion[2];
+TextureRegion *Assets::numberRegions[10]; //TextureRegion* の配列(ポインタではない)
 TextureRegion *Assets::titleBackgroundRegion;
-
-Texture *Assets::charAtlus = NULL;
 TextureRegion *Assets::charRegion[16];
-
-Texture* Assets::tapAnimation = NULL;
-TextureRegion *Assets::tapAnimationRegion[16];
-
-Texture *Assets::stringAtlus = NULL;
+TextureRegion *Assets::tapAnimationRegion[8];
 TextureRegion *Assets::stringExitRegion;
 TextureRegion *Assets::stringPlayRegion;
 TextureRegion *Assets::stringTitleRegion;
 TextureRegion *Assets::stringScoreRegion;
+TextureRegion *Assets::player;
+TextureRegion *Assets::background;
+TextureRegion *Assets::character[4];
 
-TextureRegion *Assets::targetRegion;
-TextureRegion *Assets::numberRegions[9]; //TextureRegion* の配列(ポインタではない)
-
+TextureRegion* Assets::CutTextureWithCellIndex(Texture* texture, float cellSize, int left, int top, int width, int height)
+{
+  return new TextureRegion(texture, left*cellSize, top*cellSize, width*cellSize, height*cellSize);
+}
 void Assets::loadFiles()
 {
-  titleBground = new PngTexture("../resources/background.png");
+  textureAtlas = new PngTexture("../resources/textureAtlas.png");
+  int w  = textureAtlas->Width();
+  int h  = textureAtlas->Height();;
+  int row=8;
+  int col=8;
+  float pSize = 1.0*w/row;
 
-  titleBackgroundRegion = new TextureRegion(titleBground, 0, 0, titleBground->getWidth(), titleBground->getHeight());
+  auto cutTexture
+    = []( Texture* texture,int cellSize, int left, int top, int width, int height)
+    {
+      return new TextureRegion(texture, left*cellSize, top*cellSize, width*cellSize, height*cellSize);
+    };
   
-  titleString = new PngTexture("../resources/titleString.png");
-  playString = new PngTexture("../resources/playString.png");
-  scoreString = new PngTexture("../resources/scoreString.png");
 
-  stringAtlus = new PngTexture("../resources/string.png");
-  stringTitleRegion = new TextureRegion(stringAtlus, 0,                              0, stringAtlus->getWidth(), stringAtlus->getHeight()/4.0);
-  stringPlayRegion  = new TextureRegion(stringAtlus, 0, 1*stringAtlus->getHeight()/4.0, stringAtlus->getWidth(), stringAtlus->getHeight()/4.0);
-  stringScoreRegion = new TextureRegion(stringAtlus, 0, 2*stringAtlus->getHeight()/4.0, stringAtlus->getWidth(), stringAtlus->getHeight()/4.0);
-  stringExitRegion  = new TextureRegion(stringAtlus, 0, 3*stringAtlus->getHeight()/4.0, stringAtlus->getWidth(), stringAtlus->getHeight()/4.0);
-
-  titleString = new PngTexture("../resources/titleString.png");
-  playString = new PngTexture("../resources/playString.png");
-  scoreString = new PngTexture("../resources/scoreString.png");
-
-  target = new PngTexture("../resources/target.png");
-  targetRegion = new TextureRegion(target, 0, 0, target->getWidth(), target->getHeight());  
-
-  tapAnimation = new PngTexture("../resources/tap.png");
-  charAtlus = new PngTexture("../resources/stringNumbers.png");
-  for(int i=0; i<16; i++)
+  int k=0;
+  int num=10;
+  float t1, v1;
+  for(int i=k; i<k+num; i++)
   {
-    float t1 = (i%4)*0.25;
-    float v1 = floor(i/4)*0.25;
-    tapAnimationRegion[i] = new TextureRegion(tapAnimation, 256.0*t1, 256.0*v1, 256.0/4, 256.0/4);
-    charRegion[i] =  new TextureRegion(charAtlus, 256.0*t1, 256.0*v1, 256.0/4, 256.0/4);
+    t1 = (i%row)*pSize;
+    v1 = floor(i/col)*pSize;
+    numberRegions[i] = new TextureRegion(textureAtlas, t1, v1, pSize, pSize);
   }
-
-  numbers = new PngTexture("../resources/number.png");
-  for(int i=0; i<9; i++)
+  k+=num;
+  
+  num=11;  
+  for(int i=k, j=0; i<k+num; i++, j++)
   {
-    float t1 = (i%3)*0.33;
-    float v1 = floor(i/3)*0.33;
-    numberRegions[i] = new TextureRegion(numbers, 512*t1, 512*v1, 512.0/3, 512.0/3);
+    t1 = (i%row)*pSize;
+    v1 = floor(i/col)*pSize;
+    charRegion[j] =  new TextureRegion(textureAtlas, t1, v1, pSize, pSize);
+  }  
+  k+=num+1;
+  
+  num=2;
+  for(int i=22, j=0; i<22+num;i++, j++)
+  {
+    t1 = (i%row)*pSize;
+    v1 = floor(i/col)*pSize;
+    fingerRegion[j] = cutTexture(textureAtlas, pSize, (i%row), floor(i/col), 1, 1);
   }
   
+  stringTitleRegion = cutTexture(textureAtlas, pSize, 0, 3, 3, 1);  
+  stringPlayRegion  = cutTexture(textureAtlas, pSize, 3, 3, 2, 1);
+  stringScoreRegion = cutTexture(textureAtlas, pSize, 5, 3, 2, 1);
+  stringExitRegion  = cutTexture(textureAtlas, pSize, 0, 4, 2, 1);
+
+  for(int i=34, j=0; i<34+8; i++, j++)
+    tapAnimationRegion[j] = cutTexture(textureAtlas, pSize, (i%row), floor(i/col), 1, 1);
+
+  player = cutTexture(textureAtlas, pSize, 2, 5, 1, 2);
+
+  characterAtlas = new PngTexture("../resources/character.png");
+  character[0] = cutTexture(characterAtlas, 100, 0, 0, 1, 1);
+  character[1] = cutTexture(characterAtlas, 100, 1, 0, 1, 1);
+  character[2] = cutTexture(characterAtlas, 100, 0, 1, 1, 1);
+  character[3] = cutTexture(characterAtlas, 100, 1, 1, 1, 1);
+  
+  backgroundAtlas = new PngTexture("../resources/bgd.png");
+  titleBackgroundRegion = new TextureRegion(backgroundAtlas, 0,0, 512, 512);
+  background = new TextureRegion(backgroundAtlas, 0,0, 512, 512);
 
 }
 

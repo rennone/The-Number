@@ -8,34 +8,30 @@
 class Assets
 {
 public :
-  static Texture *titleBground;
-  static Texture *titleString;
-  static Texture *playString;
-  static Texture *scoreString;
-  static Texture *target;
-  static Texture *numbers;
-
-  static TextureRegion *titleBackgroundRegion;
-
-  static Texture *stringAtlus;
-  static Texture *charAtlus;
-  static TextureRegion *charRegion[16];
-  static Texture *tapAnimation;
-  static TextureRegion *tapAnimationRegion[16];
+  static Texture *textureAtlas;
+  static Texture *characterAtlas;
+  static Texture *backgroundAtlas;
   
-  static TextureRegion *targetRegion;
-  static TextureRegion *numberRegions[9];
-
+  static TextureRegion *titleBackgroundRegion;  
+  static TextureRegion *fingerRegion[2];  
+  static TextureRegion *charRegion[16];  
+  static TextureRegion *tapAnimationRegion[8];
+  static TextureRegion *numberRegions[10];  
   static TextureRegion *stringPlayRegion;
   static TextureRegion *stringTitleRegion;
   static TextureRegion *stringScoreRegion;
   static TextureRegion *stringExitRegion;
+  static TextureRegion *player;
+  static TextureRegion *background;
+  static TextureRegion *character[4];
+  
   static void loadFiles();
   static void unloadFiles();
 
 private:
   Assets();
   Assets& operator=(const Assets& obj);
+  static TextureRegion* CutTextureWithCellIndex(Texture* texture, float cellSize, int left, int top, int width, int height);
 };
 
 #endif

@@ -5,13 +5,12 @@
 #include "Debugger.h"
 #include "Assets.h"
 #include "GLutil.h"
-
-#include "BeforePlayScene.h"
+#include "PlayScene.h"
 
 TitleScene::TitleScene(GameApplication *game)
   :GameScene(game)
 {
-  batcher = new SpriteBatcher(10);
+  batcher = new SpriteBatcher(20);
 
   strPos[0] = make_tuple(0, 200-0*100, 100, 50, Assets::stringTitleRegion);
   strPos[1] = make_tuple(0, 200-1*100, 100, 50, Assets::stringPlayRegion);
@@ -26,6 +25,8 @@ void TitleScene::update(float delta)
   auto leapMotion = game->Input()->LeapMotion();
 
   const auto pushed = leapMotion->PushedPoints();
+
+  int next = -1;
   for(const auto  p : pushed)
   {
     for(int i=1; i<4; i++)
@@ -34,12 +35,25 @@ void TitleScene::update(float delta)
       float y = std::get<1>(strPos[i]);
       float w = std::get<2>(strPos[i]);
       float h = std::get<3>(strPos[i]);
-      //if( (x-w/2)<=p.x && p<=(x+w/2) && (y-h/2)<=p.y && p.y<=(y+h/2) )        
+      if( (x-w/2)<=p.x && p.x<=(x+w/2) && (y-h/2)<=p.y && p.y<=(y+h/2) )
+        next=i;     
     }
-  }  
-  if(keyboard->keyState(GLFW_KEY_A) == GLFW_PRESS){
-    game->replaceScene(new BeforePlayScene(game));
   }
+
+  switch(next)
+  {
+  case 1:
+    game->replaceScene(new PlayScene(game));
+    break;
+  case 2:
+    break;
+  case 3:
+    game->terminate();
+    break;
+  default:
+    break;
+  }  
+  if(keyboard->keyState(GLFW_KEY_ENTER) == GLFW_PRESS)    game->replaceScene(new PlayScene(game));  
 }
         
 void TitleScene::render(float delta)
@@ -49,20 +63,34 @@ void TitleScene::render(float delta)
 
   glPushAttrib(GL_CURRENT_BIT | GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT);
   glPushMatrix();
-  Camera::getInstance()->set2DView(game->Window());
-  glEnable(GL_TEXTURE_2D);
-
+  
+  Camera::getInstance()->set2DView(game->Window());  
+/*
   batcher->beginBatch(Assets::titleBground);
   batcher->drawSprite(0,0,width, height, Assets::titleBackgroundRegion);
   batcher->endBatch();
-
-  batcher->beginBatch(Assets::stringAtlus);
+*/
+  batcher->beginBatch(Assets::textureAtlas);
   for(int i=0; i<4; i++)
     batcher->drawSprite(std::get<0>(strPos[i]), std::get<1>(strPos[i]),
                         std::get<2>(strPos[i]), std::get<3>(strPos[i]), std::get<4>(strPos[i]) );
+  
+  auto fingers = game->Input()->LeapMotion()->ScreenPointsWithTapState();
+  for( auto finger : fingers)
+  {
+    auto pos = std::get<0>(finger);
+    auto state = std::get<1>(finger);
+    batcher->drawSprite(pos.x, pos.y, 15, 15, Assets::fingerRegion[max(0,state)]);
+  }
+  
   batcher->endBatch();
   
   glPopMatrix();
   glPopAttrib();
 
+}
+
+void TitleScene::finish()
+{
+  delete batcher;
 }

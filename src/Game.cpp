@@ -55,36 +55,48 @@ void GameApplication::motion(int x, int y)
 
 void GameApplication::loop()
 {
-  if(scene != nextScene && scene != NULL)
-  {
-    scene->finish();
-    delete scene;
-    scene = nextScene;
-  }
-  
   float delta = elapsedTime[1] - elapsedTime[0]; //前フレームの経過時間
   elapsedTime[0] = glfwGetTime();
   update(delta);
   render(delta);
   elapsedTime[1] = glfwGetTime();
+
+  checkScene();
+
+  if(terminated)
+    finish();
 }
 
-void GameApplication::terminate()
+void GameApplication::finish()
 {
   if(scene != NULL)
   {
     scene->finish();
     delete scene;
   }
-
-  glfwSetWindowShouldClose(window, GL_TRUE);
+  glfwSetWindowShouldClose(window, GL_TRUE);       
 }
 
-void GameApplication::replaceScene(GameScene *scene)
+void GameApplication::terminate()
+{
+  terminated = true;
+}
+
+void inline GameApplication::replaceScene(GameScene *scene)
 {
   nextScene = scene;
 
   if(this->scene == NULL)
     this->scene = nextScene;
+}
+
+void GameApplication::checkScene()
+{
+  if(scene != nextScene && scene != NULL)
+  {
+    scene->finish();
+    delete scene;
+    scene = nextScene;
+  }
 }
 

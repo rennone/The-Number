@@ -18,16 +18,18 @@ private:
   InputManager *input;
   double elapsedTime[2];
   float delta;
-  GLFWwindow *window;  
+  GLFWwindow *window;
+  bool terminated;
 public:
   GameApplication()
   {
     scene = NULL;
     nextScene = NULL;
+    terminated = false;
   };
 
   virtual inline void initialize();
-  virtual void replaceScene(GameScene *scene);
+  virtual inline void replaceScene(GameScene *scene);
   virtual inline void keyAction(int key,int action);
   virtual inline void mouse(int buton, int state, int x, int y);
   virtual inline void motion(int x, int y);
@@ -35,17 +37,17 @@ public:
   virtual inline void terminate();
   
   //------------------ゲッター--------------------//
-  virtual inline InputManager* Input()
+  const virtual inline InputManager* Input() const
   {
     return input;
   }
 
-  virtual inline GameScene* Scene()
+  const virtual inline GameScene* Scene() const
   {
     return scene;
   }
         
-  virtual inline GLFWwindow* Window()
+  virtual inline GLFWwindow* Window() const
   {          
     return window;
   }
@@ -53,6 +55,8 @@ public:
 private:
   virtual void update(float delta);  /* ゲームループ */
   virtual void render(float delta);
+  virtual void checkScene();
+  virtual void finish();
 };
 
 #endif

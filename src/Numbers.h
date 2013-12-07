@@ -28,6 +28,7 @@ class Numbers:public Actor
   SpriteBatcher *batcher;
   Gestures gesture;
   float elapsedTime;
+  float slowOutTime; //終わった後の余韻用
 public:
 Numbers(std::string name, GameApplication *game):Actor(name, game)
   {    
@@ -44,5 +45,4 @@ Numbers(std::string name, GameApplication *game):Actor(name, game)
   virtual void update(float delta);
   virtual void render();
 };
-
 #endif

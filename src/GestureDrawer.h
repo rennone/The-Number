@@ -54,12 +54,14 @@ TapGestureDrawer(std::string name, GameApplication *game)
   virtual void render()
   {
 
-    batcher->beginBatch(Assets::tapAnimation);
+    batcher->beginBatch(Assets::textureAtlas);
+    
+    int size = (sizeof Assets::tapAnimationRegion)/(sizeof(Assets::tapAnimationRegion[0]));
 
-
+    Debugger::drawDebugInfo("GestureDrawer.h", "size", size);
     for(int it=head; it!=tail; it = (it+1)%maxFinger)
     {
-      int number = max(0.0f, min(15.0f, elappedTime[it]/animationTime*16));      
+      int number = max(0.0f, min(size-1.0f, elappedTime[it]/animationTime*size));
       batcher->drawSprite(x[it], y[it], 30, 30, Assets::tapAnimationRegion[number]);
     }
     batcher->endBatch();
@@ -101,11 +103,11 @@ CircleGestureDrawer(std::string name, GameApplication *game)
 
   virtual void render()
   {
-    batcher->beginBatch(Assets::tapAnimation);
+    batcher->beginBatch(Assets::textureAtlas);
     for(int it=head; it != tail; it=(it+1)%maxPaint)
     {
       Debugger::drawDebugInfo("Gesture.h", "num", std::get<0>(paints[it]));
-      batcher->drawSprite(std::get<0>(paints[it]), std::get<1>(paints[it]), 30, 30, Assets::tapAnimationRegion[10]);
+      batcher->drawSprite(std::get<0>(paints[it]), std::get<1>(paints[it]), 30, 30, Assets::tapAnimationRegion[3]);
 //      batcher->drawSprite(100, 100, 30, 30, Assets::tapAnimationRegion[10]);
     }
     batcher->endBatch();

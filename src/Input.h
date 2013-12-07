@@ -3,11 +3,13 @@
 
 #include <Leap.h>
 #include <map>
+#include <vector>
+#include <tuple>
 #include <GLFW/glfw3.h>
 
 class KeyboardManager
 {
-public: 
+public:  
   virtual void keyAction(int key, int action)
   {
     nextKeyStateMap[key] = action;
@@ -109,6 +111,7 @@ public:
   }
 
   const std::vector<Leap::Vector> PushedPoints();
+  const std::vector<std::tuple<Leap::Vector, int>> ScreenPointsWithTapState();
           
   Leap::Frame Frame()
   {
@@ -147,17 +150,17 @@ public:
     leapMotion->update(delta);
   }
 
-  virtual KeyboardManager* Keyboard()
+  virtual KeyboardManager* Keyboard() const
   {
     return keyboad;
   }
 
-  virtual MouseManager* Mouse()
+  virtual MouseManager* Mouse() const
   {
     return mouse;
   }
 
-  virtual LeapMotionManager* LeapMotion()
+  virtual LeapMotionManager* LeapMotion() const
   {
     return leapMotion;
   }

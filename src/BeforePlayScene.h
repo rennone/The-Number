@@ -23,7 +23,7 @@ BeforePlayScene(GameApplication *game):GameScene(game)
   {
     elapsedTime += delta;
     
-    if(elapsedTime > 4)
+    if(elapsedTime > 1)
       game->replaceScene(scene);
   }
   
@@ -38,7 +38,7 @@ BeforePlayScene(GameApplication *game):GameScene(game)
 
     glPushMatrix();
     Camera::getInstance()->set2DView(game->Window());
-    batcher->beginBatch(Assets::charAtlus);
+    batcher->beginBatch(Assets::textureAtlas);
     batcher->drawSprite(0, 0, ratio, ratio ,Assets::charRegion[count] );
     batcher->endBatch();
     glPopMatrix();
@@ -47,6 +47,7 @@ BeforePlayScene(GameApplication *game):GameScene(game)
   virtual void reshape(int width, int height)
   {
   }
+
 
   virtual void finish()
   {

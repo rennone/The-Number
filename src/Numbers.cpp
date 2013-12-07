@@ -36,6 +36,7 @@ void Numbers::reset()
   target = 0;
   gesture = Numbers::Tap;
   elapsedTime = 0;
+  slowOutTime = 0;
 }
 
 
@@ -120,11 +121,16 @@ void Numbers::checkCircle()
 
 void Numbers::update(float delta)
 {
+  if(target>=9)
+  {
+    slowOutTime+=delta;
+    if(slowOutTime>3)
+      game->replaceScene(new TitleScene(game));
+    return;
+  }
+
   elapsedTime += delta;
   
-  if(target>=9)
-    game->replaceScene(new TitleScene(game));
-
   Debugger::drawDebugInfo("numbers.cpp", "gesture", gesture);
   switch(gesture)
   {
@@ -142,17 +148,12 @@ void Numbers::update(float delta)
 
 void Numbers::render()
 {
-  glPushAttrib(GL_CURRENT_BIT | GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT);
-  glPushMatrix();  
-  Camera::getInstance()->set2DView(game->Window());
-  glEnable(GL_TEXTURE_2D);
+  Camera::getInstance()->set2DView(game->Window()); 
   
   renderNumber();
   renderFinger();
   renderTime();
   gestures[gesture]->render();
-  glPopMatrix();
-  glPopAttrib();
 }
 
 void Numbers::renderTime()
@@ -175,7 +176,7 @@ void Numbers::renderTime()
   const int hSize = 30;
   const int x = width/2 - wSize/2;
   const int y = height/2- hSize/2;
-  batcher->beginBatch(Assets::charAtlus);
+  batcher->beginBatch(Assets::textureAtlas);
   for(int i=0; i<6; i++)
     batcher->drawSprite(x-i*wSize, y, wSize, hSize, Assets::charRegion[timer[i]]);
   batcher->endBatch();
@@ -183,7 +184,7 @@ void Numbers::renderTime()
 
 void Numbers::renderNumber()
 {
-  batcher->beginBatch(Assets::numbers);
+  batcher->beginBatch(Assets::textureAtlas);
   for(int i=target; i<9; i++)
   {
     float t1 = (i%3)*0.33;
@@ -197,11 +198,10 @@ void Numbers::renderFinger()
 {
   auto leapMotion = game->Input()->LeapMotion();
   auto fingers = leapMotion->ScreenPoints();
-  batcher->beginBatch(Assets::target);
+  batcher->beginBatch(Assets::textureAtlas);
   for( auto finger : fingers)
   {
-    batcher->drawSprite(finger.x, finger.y, 15, 15, Assets::targetRegion);
+    batcher->drawSprite(finger.x, finger.y, 15, 15, Assets::fingerRegion[0]);
   }
   batcher->endBatch();
 }
-

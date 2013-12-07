@@ -23,6 +23,9 @@ Actor(std::string _name, GameApplication *_game):name(_name), game(_game)
     status = Actor::Action;
   }
 
+  virtual ~Actor()
+  {
+  }
   virtual void render()
   {
     std::vector<Actor*>::iterator it = children.begin();
@@ -47,8 +50,24 @@ Actor(std::string _name, GameApplication *_game):name(_name), game(_game)
       if(child->status == Actor::Action || child->status == Actor::UpdateOnly)
         child->update(delta);
       it++;
+    }                
+  }
+
+  virtual void finish()
+  {
+    auto it = children.begin();
+    while(it != children.end())
+    {
+      Actor* child = *it;
+
+      child->finish();
+      it++;
     }
-                
+
+    for(auto it=children.begin(); it!=children.end(); it++)
+    {
+      delete (*it);     
+    }    
   }
 
   virtual void checkStatus()
@@ -93,7 +112,7 @@ Actor(std::string _name, GameApplication *_game):name(_name), game(_game)
   }
 
 //-------------------- getter setter --------------------//
-  enum ActorStatus Status()
+  const enum ActorStatus& Status() const
   {
     return status;
   }
@@ -103,32 +122,23 @@ Actor(std::string _name, GameApplication *_game):name(_name), game(_game)
     status = _status;
   }
 
-  Leap::Vector Position()
+  const Leap::Vector& Position() const
   {
     return position;
   }
 
-  void Position(Leap::Vector _position)
+  void Position(const Leap::Vector _position)
   {
     position = _position;
   }
 
-  Leap::Vector Direction()
-  {
-    return direction;
-  }
-
-  void Direction(Leap::Vector _direction)
-  {
-    direction = _direction;
-  }
-protected:
-  GameApplication *game;  
-  std::string name;
-  std::vector<Actor*> children;
-  Leap::Vector position, direction;
   
+protected:
+  GameApplication* const game;  
+  const std::string name;
+  std::vector<Actor*> children;  
 private:
+  Leap::Vector position;
   enum ActorStatus status;  
 };
 
