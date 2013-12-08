@@ -1,12 +1,34 @@
 #include "Input.h"
 #include "Debugger.h"
 
+const std::vector<Leap::Vector> LeapMotionManager::TappedPoints()
+{
+  std::vector<Leap::Vector> tappedPoints;
+  const auto gestureList = m_lastFrame.gestures();
+  const auto screen = getController()->locatedScreens()[0];
+  
+  for( auto gesture : gestureList )
+  {
+    if(gesture.type() != Leap::Gesture::TYPE_SCREEN_TAP) continue;
+    for( auto pointable : gesture.pointables())
+    {
+      auto normal = screen.intersect(pointable, true);
+      float x = (normal.x-0.5) * screen.widthPixels();
+      float y = (normal.y-0.5) * screen.heightPixels();
+      tappedPoints.push_back(Leap::Vector(x,y,0));
+    }
+  }
+
+  return tappedPoints;
+}
+
 const std::vector<Leap::Vector> LeapMotionManager::PushedPoints()
 {
   std::vector<Leap::Vector> pushedPoints;
   const auto screen = getController()->locatedScreens()[0];
-  const auto pointables = m_lastFrame.pointables();
-
+  
+  const auto pointables     = m_lastFrame.pointables();
+  
   static bool flag = false;
   for(auto pointable: pointables)
   {
@@ -18,12 +40,11 @@ const std::vector<Leap::Vector> LeapMotionManager::PushedPoints()
     if( pointable.touchDistance() > border && pointable.touchZone() != Leap::Pointable::Zone::ZONE_NONE)
     {
       if(flag) continue;
-      flag = true;
-      Debugger::drawDebugInfo("Input.cpp", "touch",  pointable.touchDistance());
+      flag = true;    
       pushedPoints.push_back(Leap::Vector(x,y,0));
-    } else
-    {
-      Debugger::drawDebugInfo("Input.cpp", "else",  pointable.touchDistance());
+    }
+    else
+    {    
       flag = false;
     }
   }

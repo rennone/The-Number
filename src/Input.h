@@ -111,23 +111,18 @@ public:
   }
 
   const std::vector<Leap::Vector> PushedPoints();
+  const std::vector<Leap::Vector> TappedPoints();
   const std::vector<std::tuple<Leap::Vector, int>> ScreenPointsWithTapState();
           
   Leap::Frame Frame()
   {
     return m_lastFrame;
   }
-  
-/*
-  CircleGesture()
-  {
-  }
-  
-*/
 
 private:
   LeapMotionManager(){
     getController()->enableGesture( Leap::Gesture::TYPE_SCREEN_TAP );
+    getController()->enableGesture( Leap::Gesture::TYPE_KEY_TAP );
     getController()->enableGesture( Leap::Gesture::TYPE_CIRCLE );
   }
   LeapMotionManager& operator=(const LeapMotionManager& obj);

@@ -24,7 +24,7 @@ void TitleScene::update(float delta)
 
   auto leapMotion = game->Input()->LeapMotion();
 
-  const auto pushed = leapMotion->PushedPoints();
+  const auto pushed = leapMotion->TappedPoints();
 
   int next = -1;
   for(const auto  p : pushed)
@@ -64,24 +64,18 @@ void TitleScene::render(float delta)
   glPushAttrib(GL_CURRENT_BIT | GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT);
   glPushMatrix();
   
-  Camera::getInstance()->set2DView(game->Window());  
-/*
-  batcher->beginBatch(Assets::titleBground);
-  batcher->drawSprite(0,0,width, height, Assets::titleBackgroundRegion);
-  batcher->endBatch();
-*/
+  Camera::getInstance()->set2DView(game->Window());
+  
   batcher->beginBatch(Assets::textureAtlas);
+  
   for(int i=0; i<4; i++)
     batcher->drawSprite(std::get<0>(strPos[i]), std::get<1>(strPos[i]),
                         std::get<2>(strPos[i]), std::get<3>(strPos[i]), std::get<4>(strPos[i]) );
   
-  auto fingers = game->Input()->LeapMotion()->ScreenPointsWithTapState();
+  auto fingers = game->Input()->LeapMotion()->ScreenPoints();
+  
   for( auto finger : fingers)
-  {
-    auto pos = std::get<0>(finger);
-    auto state = std::get<1>(finger);
-    batcher->drawSprite(pos.x, pos.y, 15, 15, Assets::fingerRegion[max(0,state)]);
-  }
+    batcher->drawSprite(finger.x, finger.y, 15, 15, Assets::fingerRegion[0]);
   
   batcher->endBatch();
   

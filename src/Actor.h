@@ -53,23 +53,6 @@ Actor(std::string _name, GameApplication *_game):name(_name), game(_game)
     }                
   }
 
-  virtual void finish()
-  {
-    auto it = children.begin();
-    while(it != children.end())
-    {
-      Actor* child = *it;
-
-      child->finish();
-      it++;
-    }
-
-    for(auto it=children.begin(); it!=children.end(); it++)
-    {
-      delete (*it);     
-    }    
-  }
-
   virtual void checkStatus()
   {
     if(status == Actor::Dead)
@@ -94,25 +77,22 @@ Actor(std::string _name, GameApplication *_game):name(_name), game(_game)
     children.push_back(child);
   }
         
-  Actor* searchChild(std::string name)
+  Actor* searchChild(std::string _name) 
   {
-    if(this->name == name)
+    if(this->name == _name)
       return this;
 
-    Actor* res = NULL;
-    for(auto it = children.begin(); it != children.end(); it++)
-    {
-      Actor* child = *it;
-      res = child->searchChild(name);
+    for( auto child : children)
+    {    
+      auto res = child->searchChild(_name);
       if(res != NULL)
         return res;
     }
-
     return NULL;
   }
 
 //-------------------- getter setter --------------------//
-  const enum ActorStatus& Status() const
+  enum ActorStatus Status() const
   {
     return status;
   }
@@ -122,7 +102,7 @@ Actor(std::string _name, GameApplication *_game):name(_name), game(_game)
     status = _status;
   }
 
-  const Leap::Vector& Position() const
+  Leap::Vector Position() const
   {
     return position;
   }

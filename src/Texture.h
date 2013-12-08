@@ -87,7 +87,7 @@ public:
   const float ratio; // height/width;
   const Texture * const texture;
   
-  TextureRegion(Texture *_texture, float x, float y, float width, float height)
+  TextureRegion(const Texture *_texture,const float x,const float y,const float width,const float height)
     :texture(_texture),
     u1(        1.0*x/_texture->Width()), v1(          1.0*y/_texture->Height()),
     u2(1.0*(x+width)/_texture->Width()), v2( 1.0*(y+height)/_texture->Height()), ratio(height/width)
@@ -95,6 +95,73 @@ public:
   }
 };
 
+/*
+class TextureAnimation
+{
+  std::vector<TextureRegion*> regions;
+  const Texture* const texture;
+  int index;
+  bool repeat;
+  float loopTime;
+  float elapsedTime;
+public:
+TextureAnimation(Texture *_texture, float _loopTime)
+  :texture(_texture), index(0), loopTime(_loopTime), elapsedTime(0)
+  {
+  }
+
+  void start()
+  {
+    index = 0;
+    elapsedTime = 0;
+  }
+  
+  void addFrame(const TextureRegion *region)
+  {
+    regions.push_back(region);
+  }
+
+  void update(float delta)
+  {
+    elapsedTime+=delta;
+    if(regions.size() == 0)
+      return;
+    if(elapsedTime > 1.0/region.size())
+    {
+      next();
+      elapsedTime -= 1.0/region.size();
+    }
+  }
+  
+  void next()
+  {
+    if(repeat)
+      index = (index+1)%regions.size();
+    else
+      index = min(regions.size()-1, index+1);
+  }
+
+  TextureRegion* frame() const
+  {
+    return regions[index];
+  }
+
+  void Repeat(bool _repeat)
+  {
+    repeat = _repeat;
+  }
+
+  bool isLast() const
+  {
+    return index == regions.size()-1;
+  }
+
+  int numFrame() const
+  {
+    return regions.size();
+  }
+};
+*/
 class PngTexture:public Texture
 {
   unsigned char *image;

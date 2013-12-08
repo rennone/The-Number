@@ -14,7 +14,7 @@ public:
   void beginBatch(Texture *texture);
   void drawSprite(const float &x, const float &y, const float &width, const float &height, const TextureRegion *region);
   void drawSprite(const float &x, const float &y, const float &width, const float &height, const float &angle, const TextureRegion *region);
-  void endBatch();
+  void endBatch() const;
 
   static void drawTexture(const float &x, const float &y, const float &width, const float &height, const TextureRegion *region);
   static void drawTexture(const float &x, const float &y, const float &width, const float &height, const float &angle, const TextureRegion *region);

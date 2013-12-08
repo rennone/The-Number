@@ -4,6 +4,7 @@
 #include <Leap.h>
 #include "GameScene.h"
 #include "Actor.h"
+#include "Sprite.h"
 
 class PlayScene : public GameScene
 {
@@ -20,8 +21,15 @@ public:
     root->Status(Actor::Dead);
     root->checkStatus();
   }
+
+  Actor* Root() const
+  {
+    return root;
+  }
+  
 private:
   Actor *root;
+  SpriteBatcher *batcher;
 };
 
 
