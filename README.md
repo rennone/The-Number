@@ -1,4 +1,6 @@
 The-Number
 ==========
 
-Assignment of Contents Media Information
+真ん中のキャラクタに当たる前に, 回りから飛んでくる物体をタッチして消すゲーム.
+モーションはLeapMotionで検出
+

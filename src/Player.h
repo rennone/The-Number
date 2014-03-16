@@ -5,7 +5,7 @@
 #include "Assets.h"
 #include "Camera.h"
 #include "Debugger.h"
-
+#include <algorithm>
 #include <random>
 
 class Bullet:public Actor
@@ -76,10 +76,10 @@ BulletManager(std::string name, GameApplication *game, SpriteBatcher *batcher)
       addChild(bullets[i]);
     }
   }
+  
   ~BulletManager()
   {
-    for(int i=0; i<bulletNum; i++)    
-      delete bullets[i];    
+    //bulletsはcheckStatus()で消されるから, ここで消す必要ない
   }
 
   void shoot(Leap::Vector src, Leap::Vector dist)
@@ -93,20 +93,21 @@ class Player:public Actor
 {
   SpriteBatcher *batcher;
   BulletManager *bulletManager;
-  int life;
+  int hitted;
+  float radius;
+  float elapsedTime;
 public:
 Player(std::string name, GameApplication *game, SpriteBatcher *_batcher)
-  :Actor(name, game), batcher(_batcher)
+  :Actor(name, game), batcher(_batcher), radius(100), hitted(0), elapsedTime(0)
   {
     bulletManager = new BulletManager("bulletManager", game, _batcher);
     addChild(bulletManager);
     Position(Leap::Vector(0,0,0));
-    life = 4;
   }
 
   ~Player()
   {
-    delete bulletManager;
+    //bulletManagerはcheckStatus()で消されるから, ここで消す必要ない
   }
 
   void shoot()
@@ -120,6 +121,9 @@ Player(std::string name, GameApplication *game, SpriteBatcher *_batcher)
   
   void update(float delta)
   {
+    if(elapsedTime>0)
+      elapsedTime = max(0.0f, elapsedTime-delta);
+    
     shoot();
     Actor::update(delta);
   }
@@ -129,14 +133,29 @@ Player(std::string name, GameApplication *game, SpriteBatcher *_batcher)
     auto fingers = game->Input()->LeapMotion()->ScreenPoints();
     for(auto finger : fingers)
       batcher->drawSprite(finger.x, finger.y, 30, 30, Assets::fingerRegion[0]);
-          
-    batcher->drawSprite(Position().x, Position().y, 100, 100*Assets::player[min(3,max(0,life-1))]->ratio, Assets::player[max(0,life-1)]);
+
+    if(elapsedTime>0)
+      batcher->drawSprite(Position().x, Position().y, radius, radius, Assets::player[0]);
+    else
+      batcher->drawSprite(Position().x, Position().y, radius, radius, Assets::player[1]);
+    
     Actor::render();
   }
 
-  void getDamage()
+  bool damage(const Leap::Vector &pos, const float _radius)
   {
-    life--; 
+    if( pos.distanceTo(Position()) < 0.5*(radius+_radius) )
+    {
+      elapsedTime=1.0;
+      hitted++;
+      return true;
+    }
+    return false;
+  }
+
+  int Hitted() const
+  {
+    return hitted;
   }
 };
 
@@ -170,15 +189,13 @@ Enemy(std::string name, GameApplication *game, SpriteBatcher *_batcher, Player *
   void update(float delta)
   {
     elapsedTime += delta;
-    auto d = target->Position() - Position();
-    float length = d.magnitude();
 
-    if( length<30)
-    {
-      target->getDamage();
+    if( target->damage(Position(), radius) )
+    {    
       Status(Actor::NoUse);
       return;
     }
+    auto d = target->Position()-Position();
     Position( Position()+delta*speed*d.normalized() );
   }
 
@@ -227,8 +244,7 @@ EnemyManager(std::string name, GameApplication *game, Player *player, SpriteBatc
 
   ~EnemyManager()
   {
-    for(auto enemy : enemies)
-      delete enemy;
+    //enemyはcheckStatus()で消されるから, ここで消す必要ない    
   }    
 
   virtual void update(float delta)
@@ -261,11 +277,12 @@ EnemyManager(std::string name, GameApplication *game, Player *player, SpriteBatc
 
 class Timer:public Actor
 {
+  float timeLimit;
   float elapsedTime;
   SpriteBatcher *batcher;
 public:
 Timer(std::string name, GameApplication *game, SpriteBatcher *_batcher)
-  :Actor(name, game), elapsedTime(0), batcher(_batcher)
+  :Actor(name, game), elapsedTime(0), batcher(_batcher), timeLimit(20)
   {
   }
 
@@ -273,9 +290,19 @@ Timer(std::string name, GameApplication *game, SpriteBatcher *_batcher)
   {
   }
 
+  const bool timeOut() const
+  {
+    return elapsedTime>=timeLimit;
+  }
+
+  const float limit() const
+  {
+    return timeLimit;
+  }    
+  
   void update(float delta)
   {
-    elapsedTime += delta;
+    elapsedTime = min(elapsedTime+delta, timeLimit);
   }
 
   void render()

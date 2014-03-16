@@ -52,10 +52,10 @@ void Assets::loadFiles()
   for(int i=0; i<6; i++)
     enemy[i] = cutTexture(textureAtlas, pSize, i, 4, 1, 1);
 
-  stringTitleRegion = cutTexture(textureAtlas, pSize, 0, 1, 3, 1);  
-  stringPlayRegion  = cutTexture(textureAtlas, pSize, 3, 1, 2, 1);
-  stringScoreRegion = cutTexture(textureAtlas, pSize, 5, 1, 2, 1);
-  stringExitRegion  = cutTexture(textureAtlas, pSize, 7, 1, 2, 1);
+  stringTitleRegion = cutTexture(textureAtlas, pSize,  0, 1, 5, 1);  
+  stringPlayRegion  = cutTexture(textureAtlas, pSize, 12, 1, 4, 2);
+  stringScoreRegion = cutTexture(textureAtlas, pSize, 12, 3, 4, 2);
+  stringExitRegion  = cutTexture(textureAtlas, pSize, 12, 5, 4, 2);
   
   titleBackgroundRegion = cutTexture(textureAtlas, pSize, 9, 1, 7, 5);
   background = cutTexture(textureAtlas, pSize, 8, 7, 8, 4);
@@ -63,4 +63,5 @@ void Assets::loadFiles()
 
 void Assets::unloadFiles()
 {
+  
 }

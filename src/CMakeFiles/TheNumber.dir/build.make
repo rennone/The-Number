@@ -98,9 +98,32 @@ CMakeFiles/TheNumber.dir/Texture.cpp.o.provides: CMakeFiles/TheNumber.dir/Textur
 
 CMakeFiles/TheNumber.dir/Texture.cpp.o.provides.build: CMakeFiles/TheNumber.dir/Texture.cpp.o
 
+CMakeFiles/TheNumber.dir/Player.cpp.o: CMakeFiles/TheNumber.dir/flags.make
+CMakeFiles/TheNumber.dir/Player.cpp.o: Player.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/Player.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/Player.cpp.o -c /Users/REN/git/The-Number/src/Player.cpp
+
+CMakeFiles/TheNumber.dir/Player.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TheNumber.dir/Player.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /Users/REN/git/The-Number/src/Player.cpp > CMakeFiles/TheNumber.dir/Player.cpp.i
+
+CMakeFiles/TheNumber.dir/Player.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TheNumber.dir/Player.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /Users/REN/git/The-Number/src/Player.cpp -o CMakeFiles/TheNumber.dir/Player.cpp.s
+
+CMakeFiles/TheNumber.dir/Player.cpp.o.requires:
+.PHONY : CMakeFiles/TheNumber.dir/Player.cpp.o.requires
+
+CMakeFiles/TheNumber.dir/Player.cpp.o.provides: CMakeFiles/TheNumber.dir/Player.cpp.o.requires
+	$(MAKE) -f CMakeFiles/TheNumber.dir/build.make CMakeFiles/TheNumber.dir/Player.cpp.o.provides.build
+.PHONY : CMakeFiles/TheNumber.dir/Player.cpp.o.provides
+
+CMakeFiles/TheNumber.dir/Player.cpp.o.provides.build: CMakeFiles/TheNumber.dir/Player.cpp.o
+
 CMakeFiles/TheNumber.dir/Sprite.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/Sprite.cpp.o: Sprite.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/Sprite.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/Sprite.cpp.o -c /Users/REN/git/The-Number/src/Sprite.cpp
 
@@ -123,7 +146,7 @@ CMakeFiles/TheNumber.dir/Sprite.cpp.o.provides.build: CMakeFiles/TheNumber.dir/S
 
 CMakeFiles/TheNumber.dir/Game.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/Game.cpp.o: Game.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/Game.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/Game.cpp.o -c /Users/REN/git/The-Number/src/Game.cpp
 
@@ -146,7 +169,7 @@ CMakeFiles/TheNumber.dir/Game.cpp.o.provides.build: CMakeFiles/TheNumber.dir/Gam
 
 CMakeFiles/TheNumber.dir/Debugger.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/Debugger.cpp.o: Debugger.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/Debugger.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/Debugger.cpp.o -c /Users/REN/git/The-Number/src/Debugger.cpp
 
@@ -169,7 +192,7 @@ CMakeFiles/TheNumber.dir/Debugger.cpp.o.provides.build: CMakeFiles/TheNumber.dir
 
 CMakeFiles/TheNumber.dir/Camera.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/Camera.cpp.o: Camera.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/Camera.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/Camera.cpp.o -c /Users/REN/git/The-Number/src/Camera.cpp
 
@@ -192,7 +215,7 @@ CMakeFiles/TheNumber.dir/Camera.cpp.o.provides.build: CMakeFiles/TheNumber.dir/C
 
 CMakeFiles/TheNumber.dir/Assets.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/Assets.cpp.o: Assets.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/Assets.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/Assets.cpp.o -c /Users/REN/git/The-Number/src/Assets.cpp
 
@@ -215,7 +238,7 @@ CMakeFiles/TheNumber.dir/Assets.cpp.o.provides.build: CMakeFiles/TheNumber.dir/A
 
 CMakeFiles/TheNumber.dir/TitleScene.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/TitleScene.cpp.o: TitleScene.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/TitleScene.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/TitleScene.cpp.o -c /Users/REN/git/The-Number/src/TitleScene.cpp
 
@@ -238,7 +261,7 @@ CMakeFiles/TheNumber.dir/TitleScene.cpp.o.provides.build: CMakeFiles/TheNumber.d
 
 CMakeFiles/TheNumber.dir/PlayScene.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/PlayScene.cpp.o: PlayScene.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/PlayScene.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/PlayScene.cpp.o -c /Users/REN/git/The-Number/src/PlayScene.cpp
 
@@ -261,7 +284,7 @@ CMakeFiles/TheNumber.dir/PlayScene.cpp.o.provides.build: CMakeFiles/TheNumber.di
 
 CMakeFiles/TheNumber.dir/lodepng.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/lodepng.cpp.o: lodepng.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/lodepng.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/lodepng.cpp.o -c /Users/REN/git/The-Number/src/lodepng.cpp
 
@@ -284,7 +307,7 @@ CMakeFiles/TheNumber.dir/lodepng.cpp.o.provides.build: CMakeFiles/TheNumber.dir/
 
 CMakeFiles/TheNumber.dir/GLutil.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/GLutil.cpp.o: GLutil.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/GLutil.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/GLutil.cpp.o -c /Users/REN/git/The-Number/src/GLutil.cpp
 
@@ -307,7 +330,7 @@ CMakeFiles/TheNumber.dir/GLutil.cpp.o.provides.build: CMakeFiles/TheNumber.dir/G
 
 CMakeFiles/TheNumber.dir/Numbers.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/Numbers.cpp.o: Numbers.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/Numbers.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/Numbers.cpp.o -c /Users/REN/git/The-Number/src/Numbers.cpp
 
@@ -330,7 +353,7 @@ CMakeFiles/TheNumber.dir/Numbers.cpp.o.provides.build: CMakeFiles/TheNumber.dir/
 
 CMakeFiles/TheNumber.dir/main.cpp.o: CMakeFiles/TheNumber.dir/flags.make
 CMakeFiles/TheNumber.dir/main.cpp.o: main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/REN/git/The-Number/src/CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TheNumber.dir/main.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TheNumber.dir/main.cpp.o -c /Users/REN/git/The-Number/src/main.cpp
 
@@ -355,6 +378,7 @@ CMakeFiles/TheNumber.dir/main.cpp.o.provides.build: CMakeFiles/TheNumber.dir/mai
 TheNumber_OBJECTS = \
 "CMakeFiles/TheNumber.dir/Input.cpp.o" \
 "CMakeFiles/TheNumber.dir/Texture.cpp.o" \
+"CMakeFiles/TheNumber.dir/Player.cpp.o" \
 "CMakeFiles/TheNumber.dir/Sprite.cpp.o" \
 "CMakeFiles/TheNumber.dir/Game.cpp.o" \
 "CMakeFiles/TheNumber.dir/Debugger.cpp.o" \
@@ -372,6 +396,7 @@ TheNumber_EXTERNAL_OBJECTS =
 
 TheNumber: CMakeFiles/TheNumber.dir/Input.cpp.o
 TheNumber: CMakeFiles/TheNumber.dir/Texture.cpp.o
+TheNumber: CMakeFiles/TheNumber.dir/Player.cpp.o
 TheNumber: CMakeFiles/TheNumber.dir/Sprite.cpp.o
 TheNumber: CMakeFiles/TheNumber.dir/Game.cpp.o
 TheNumber: CMakeFiles/TheNumber.dir/Debugger.cpp.o
@@ -395,6 +420,7 @@ CMakeFiles/TheNumber.dir/build: TheNumber
 
 CMakeFiles/TheNumber.dir/requires: CMakeFiles/TheNumber.dir/Input.cpp.o.requires
 CMakeFiles/TheNumber.dir/requires: CMakeFiles/TheNumber.dir/Texture.cpp.o.requires
+CMakeFiles/TheNumber.dir/requires: CMakeFiles/TheNumber.dir/Player.cpp.o.requires
 CMakeFiles/TheNumber.dir/requires: CMakeFiles/TheNumber.dir/Sprite.cpp.o.requires
 CMakeFiles/TheNumber.dir/requires: CMakeFiles/TheNumber.dir/Game.cpp.o.requires
 CMakeFiles/TheNumber.dir/requires: CMakeFiles/TheNumber.dir/Debugger.cpp.o.requires

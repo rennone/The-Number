@@ -57,6 +57,7 @@ public:
     }          
     glPopAttrib();
     glPopMatrix();
+    clearDegubInfo();
   }
   
 private:
@@ -76,7 +77,9 @@ private:
     {
       auto local = (*it).second;
       local.clear();
+      local.erase(local.begin(), local.end());
     }
+    debugInfo.erase(debugInfo.begin(), debugInfo.end());
   }
 };
 

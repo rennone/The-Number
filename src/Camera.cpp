@@ -51,7 +51,7 @@ Leap::Vector Camera::screenToWorldVector(GLFWwindow* window, float x, float y)
   
   float screenX = x/width;
   float screenY = y/height;  
-  float nearHeight = near*tan(M_PI*fovy/180.0);
+  float nearHeight = near*tan(M_PI*fovy/180.0); //ŠÔˆá‚¢, fovy‚Í0~180‹‚Ì”ÍˆÍ‚È‚Ì‚Å, fovy/2‚Ìtan‚ğo‚µ‚Ä, height‚Í2”{‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
   float nearWidth  = nearHeight*ratio;
   float farHeight  = far*tan(M_PI*fovy/180.0);
   float farWidth   = farHeight*ratio;

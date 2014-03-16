@@ -12,6 +12,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/Users/REN/git/The-Number/src/Input.cpp" "/Users/REN/git/The-Number/src/CMakeFiles/TheNumber.dir/Input.cpp.o"
   "/Users/REN/git/The-Number/src/Numbers.cpp" "/Users/REN/git/The-Number/src/CMakeFiles/TheNumber.dir/Numbers.cpp.o"
   "/Users/REN/git/The-Number/src/PlayScene.cpp" "/Users/REN/git/The-Number/src/CMakeFiles/TheNumber.dir/PlayScene.cpp.o"
+  "/Users/REN/git/The-Number/src/Player.cpp" "/Users/REN/git/The-Number/src/CMakeFiles/TheNumber.dir/Player.cpp.o"
   "/Users/REN/git/The-Number/src/Sprite.cpp" "/Users/REN/git/The-Number/src/CMakeFiles/TheNumber.dir/Sprite.cpp.o"
   "/Users/REN/git/The-Number/src/Texture.cpp" "/Users/REN/git/The-Number/src/CMakeFiles/TheNumber.dir/Texture.cpp.o"
   "/Users/REN/git/The-Number/src/TitleScene.cpp" "/Users/REN/git/The-Number/src/CMakeFiles/TheNumber.dir/TitleScene.cpp.o"

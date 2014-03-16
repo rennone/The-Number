@@ -1,5 +1,6 @@
 #include "Input.h"
 #include "Debugger.h"
+#include <sstream>
 
 const std::vector<Leap::Vector> LeapMotionManager::TappedPoints()
 {
@@ -29,25 +30,24 @@ const std::vector<Leap::Vector> LeapMotionManager::PushedPoints()
   
   const auto pointables     = m_lastFrame.pointables();
   
-  static bool flag = false;
+  int i=0;
+  
   for(auto pointable: pointables)
   {
-    auto normal =  screen.intersect(pointable.tipPosition(),pointable.direction(), true);    
-    float x     = (normal.x-0.5) * screen.widthPixels();
-    float y     = (normal.y-0.5) * screen.heightPixels();
-    
+    std::stringstream ss;
+    ss << "finger" << i++;
+    Debugger::drawDebugInfo("Input.cpp", ss.str(), pointable.tipVelocity());
     const float border = 0.0;
     if( pointable.touchDistance() > border && pointable.touchZone() != Leap::Pointable::Zone::ZONE_NONE)
-    {
-      if(flag) continue;
-      flag = true;    
+    {      
+      auto normal =  screen.intersect(pointable.tipPosition(),pointable.direction(), true);    
+      float x     = (normal.x-0.5) * screen.widthPixels();
+      float y     = (normal.y-0.5) * screen.heightPixels();
+
       pushedPoints.push_back(Leap::Vector(x,y,0));
     }
-    else
-    {    
-      flag = false;
-    }
   }
+  
   return pushedPoints;
 }
 

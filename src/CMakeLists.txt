@@ -5,7 +5,7 @@ set(Project TheNumber)
 #project name
 PROJECT(${Project})
 
-set(srcFile Input.cpp Texture.cpp Sprite.cpp Game.cpp Debugger.cpp Camera.cpp Assets.cpp TitleScene.cpp PlayScene.cpp lodepng.cpp GLutil.cpp Numbers.cpp main.cpp)
+set(srcFile Input.cpp Texture.cpp Player.cpp Sprite.cpp Game.cpp Debugger.cpp Camera.cpp Assets.cpp TitleScene.cpp PlayScene.cpp lodepng.cpp GLutil.cpp Numbers.cpp main.cpp)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
 
 # find packages

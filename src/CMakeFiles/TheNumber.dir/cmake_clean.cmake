@@ -1,6 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/TheNumber.dir/Input.cpp.o"
   "CMakeFiles/TheNumber.dir/Texture.cpp.o"
+  "CMakeFiles/TheNumber.dir/Player.cpp.o"
   "CMakeFiles/TheNumber.dir/Sprite.cpp.o"
   "CMakeFiles/TheNumber.dir/Game.cpp.o"
   "CMakeFiles/TheNumber.dir/Debugger.cpp.o"

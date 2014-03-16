@@ -21,15 +21,18 @@ public:
     root->Status(Actor::Dead);
     root->checkStatus();
   }
-
+  
   Actor* Root() const
   {
     return root;
   }
-  
+
+  void fade(const float &alpha) const;
+
 private:
   Actor *root;
   SpriteBatcher *batcher;
+  float elapsedTime;
 };
 
 

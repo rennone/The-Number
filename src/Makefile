@@ -306,6 +306,30 @@ PlayScene.cpp.s:
 	$(MAKE) -f CMakeFiles/TheNumber.dir/build.make CMakeFiles/TheNumber.dir/PlayScene.cpp.s
 .PHONY : PlayScene.cpp.s
 
+Player.o: Player.cpp.o
+.PHONY : Player.o
+
+# target to build an object file
+Player.cpp.o:
+	$(MAKE) -f CMakeFiles/TheNumber.dir/build.make CMakeFiles/TheNumber.dir/Player.cpp.o
+.PHONY : Player.cpp.o
+
+Player.i: Player.cpp.i
+.PHONY : Player.i
+
+# target to preprocess a source file
+Player.cpp.i:
+	$(MAKE) -f CMakeFiles/TheNumber.dir/build.make CMakeFiles/TheNumber.dir/Player.cpp.i
+.PHONY : Player.cpp.i
+
+Player.s: Player.cpp.s
+.PHONY : Player.s
+
+# target to generate assembly for a file
+Player.cpp.s:
+	$(MAKE) -f CMakeFiles/TheNumber.dir/build.make CMakeFiles/TheNumber.dir/Player.cpp.s
+.PHONY : Player.cpp.s
+
 Sprite.o: Sprite.cpp.o
 .PHONY : Sprite.o
 
@@ -459,6 +483,9 @@ help:
 	@echo "... PlayScene.o"
 	@echo "... PlayScene.i"
 	@echo "... PlayScene.s"
+	@echo "... Player.o"
+	@echo "... Player.i"
+	@echo "... Player.s"
 	@echo "... Sprite.o"
 	@echo "... Sprite.i"
 	@echo "... Sprite.s"

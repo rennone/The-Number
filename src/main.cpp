@@ -24,7 +24,6 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
   ((GameApplication*)glfwGetWindowUserPointer(window))->keyAction(key, action);
 }
 
-
 int main(int argc, char *argv[]) {
   
   glfwSetErrorCallback(error_callback);
@@ -46,6 +45,9 @@ int main(int argc, char *argv[]) {
   while(!glfwWindowShouldClose(window))
   {
     game->loop();
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
   }
   
   glfwDestroyWindow(window);

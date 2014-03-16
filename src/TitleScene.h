@@ -25,6 +25,7 @@ public:
   {
   }
   virtual void finish();
+  void fade(const float &alpha) const;
 
 };
 #endif

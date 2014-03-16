@@ -31,9 +31,9 @@ void GameApplication::render(float delta)
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   scene->render(delta);
-  Debugger::renderDebug(Window());// debug
-  glfwSwapBuffers(window);
-  glfwPollEvents();
+  Debugger::renderDebug(Window());// debug 
+//  glfwSwapBuffers(window);
+//  glfwPollEvents();
 }
 
   /* キーボードイベント */

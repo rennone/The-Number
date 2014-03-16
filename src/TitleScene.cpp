@@ -39,7 +39,7 @@ void TitleScene::update(float delta)
         next=i;     
     }
   }
-
+  
   switch(next)
   {
   case 1:
@@ -62,10 +62,8 @@ void TitleScene::render(float delta)
   glfwGetFramebufferSize(game->Window(), &width, &height);
 
   glPushAttrib(GL_CURRENT_BIT | GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT);
-  glPushMatrix();
-  
-  Camera::getInstance()->set2DView(game->Window());
-  
+  glPushMatrix();  
+  Camera::getInstance()->set2DView(game->Window());  
   batcher->beginBatch(Assets::textureAtlas);
   
   for(int i=0; i<4; i++)
@@ -87,4 +85,21 @@ void TitleScene::render(float delta)
 void TitleScene::finish()
 {
   delete batcher;
+}
+
+void TitleScene::fade(const float &alpha) const
+{
+  int width, height;
+  glPushAttrib(GL_CURRENT_BIT | GL_COLOR_BUFFER_BIT );
+  glfwGetFramebufferSize(game->Window(), &width, &height);
+  glColor4d(0,0,0,alpha);
+  glBegin(GL_POLYGON);
+  glVertex2d(-width, -height);
+  glVertex2d(+width, -height);
+  glVertex2d(+width, +height);
+  glVertex2d(+width, +height);
+  glVertex2d(-width, +height);
+  glVertex2d(-width, -height);
+  glEnd();
+  glPopAttrib();
 }
